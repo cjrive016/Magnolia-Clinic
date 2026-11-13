@@ -126,6 +126,8 @@ var DAY_NAMES = { Mon: 'Monday', Tue: 'Tuesday', Wed: 'Wednesday', Thu: 'Thursda
 
 /** >>> EDIT ME: starting cleaning schedule — [person, task] pairs for each day.
  *  The person is matched to an account by username or first name. */
+/** Only a scrambled copy of the first-time setup code is kept here (this repo is public). */
+var SETUP_CODE_HASH = 'QU3WnWGikGeLUE9FnaZrUu+DWBI/oTJ/ADQ3ROkhR80=';
 var SCHEDULE_VERSION = 4;
 /** >>> EDIT ME: first day cleaning sign-offs and emails count. Change it in Admin. */
 var CLEANING_START = '2026-11-16';
@@ -175,7 +177,9 @@ function setupAdmin(code, form) {
     return withLock_(function () {
       if (rows_('Users').length) throw userErr_('Setup is already done. Please sign in.');
       var realCode = PropertiesService.getScriptProperties().getProperty('setup_code') || CONFIG.SETUP_CODE;
-      if (!realCode || String(code || '').trim() !== realCode) throw userErr_('That setup code is not correct.');
+      var typed = String(code || '').trim();
+      var okCode = realCode ? typed === realCode : (!!typed && hash_('magnolia-setup', typed) === SETUP_CODE_HASH);
+      if (!okCode) throw userErr_('That setup code is not correct.');
       var u = createUser_(form || {}, 'admin');
       return { token: newSession_(u.username) };
     });
