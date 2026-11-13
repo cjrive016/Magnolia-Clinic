@@ -1,0 +1,12 @@
+name = "magnolia-clinic-hub"
+main = "worker.js"
+compatibility_date = "2026-10-17"
+workers_dev = true
+
+[[d1_databases]]
+binding = "DB"
+database_name = "magnolia-clinic-hub"
+database_id = "950a8277-a5ee-4504-a0ed-cd7346c582ad"
+
+[triggers]
+crons = ["*/30 * * * *"]
