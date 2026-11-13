@@ -484,9 +484,6 @@
     <button data-tab="qc" onclick="showTab('qc')">
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 2v6L4 18a2 2 0 0 0 1.8 3h12.4A2 2 0 0 0 20 18L15 8V2"/><path d="M8 2h8M7 14h10"/></svg>
       CLIA QC</button>
-    <button data-tab="meds" onclick="showTab('meds')">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10.5 20.5 3.5 13.5a4.95 4.95 0 0 1 7-7l7 7a4.95 4.95 0 0 1-7 7z"/><path d="m8.5 8.5 7 7"/></svg>
-      NDC / Lot <span class="badge zero" id="medBadge">0</span></button>
     <button data-tab="calendar" onclick="showTab('calendar')">
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/></svg>
       Calendar</button>
@@ -691,47 +688,7 @@
     </div>
   </section>
 
-  <!-- ================= NDC / LOT ================= -->
-  <section id="tab-meds" class="tab">
-    <div class="alertbar hidden" id="medAlert"><span>⚠ <span id="medAlertText"></span></span>
-      <button class="btn btn-flag btn-sm" onclick="setMedFilter('soon')">Show them</button></div>
-    <div class="card">
-      <div class="cardhead"><h2 id="medFormTitle">Add a medication</h2><span class="muted">Medication, NDC, lot number, and expiration date</span></div>
-      <div class="formgrid">
-        <div class="span2"><label for="m-name">Medication</label><input id="m-name" list="medNameList" placeholder="e.g. Ceftriaxone 1 g vial"><datalist id="medNameList"></datalist></div>
-        <div><label for="m-ndc">NDC (10-digit)</label><input id="m-ndc" inputmode="numeric" placeholder="0409-4888-02" oninput="autoNdc11()"></div>
-        <div><label for="m-ndc11">NDC (11-digit / billing)</label><input id="m-ndc11" inputmode="numeric" placeholder="00409-4888-02" oninput="this.dataset.auto=''"></div>
-        <div><label for="m-lot">Lot #</label><input id="m-lot" placeholder="Lot number"></div>
-        <div><label for="m-exp">Expiration</label><input id="m-exp" type="date"></div>
-        <div><label for="m-qty">Qty on hand (optional)</label><input id="m-qty" type="number" min="0" step="1" placeholder="—"></div>
-        <div><label for="m-loc">Location (optional)</label><input id="m-loc" list="medLocList" placeholder="Med fridge, cabinet B…"><datalist id="medLocList"></datalist></div>
-        <div class="full"><label for="m-notes">Notes (optional)</label><input id="m-notes" placeholder="Manufacturer, concentration, multi-dose opened date…"></div>
-      </div>
-      <div class="formactions">
-        <button class="btn btn-primary" onclick="submitMed()" id="medBtn">Add to list</button>
-        <button class="btn btn-link hidden" id="medCancel" onclick="cancelMedEdit()">Cancel edit</button>
-      </div>
-    </div>
-
-    <div class="section-title">
-      <h2>NDC / Lot list</h2>
-      <div class="toolbar" style="margin:0">
-        <input type="search" id="medSearch" placeholder="Search name, NDC or lot…" oninput="renderMeds()">
-        <select id="medFilter" onchange="renderMeds()">
-          <option value="">All</option>
-          <option value="soon">Expired or expiring in 60 days</option>
-          <option value="expired">Expired only</option>
-        </select>
-        <button class="btn btn-white btn-sm" onclick="exportMedsCSV()">Export CSV</button>
-      </div>
-    </div>
-    <div class="tablewrap">
-      <table>
-        <thead><tr><th>Medication</th><th>NDC (10 / 11)</th><th>Lot</th><th>Expiration</th><th>Status</th><th class="num">Qty</th><th>Location</th><th>Added</th><th></th></tr></thead>
-        <tbody id="medBody"></tbody>
-      </table>
-    </div>
-  </section>
+  
 
   <!-- ================= CALENDAR ================= -->
   <section id="tab-calendar" class="tab">
@@ -1084,7 +1041,6 @@ function renderAll(){
   renderCleaning();
   renderSupplies();
   renderQC();
-  renderMeds();
   renderCalendar();
   renderNotes();
 }
