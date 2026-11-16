@@ -1,6 +1,6 @@
 # Magnolia Clinic Hub
 
-Staff website for Magnolia Clinic: cleaning schedule, supplies, CLIA QC, NDC/Lot, calendar, sticky notes, admin.
+Staff website for Magnolia Clinic: inventory count, supplies, CLIA QC, calendar, sticky notes, admin.
 
 Live at https://magnolia-clinic-hub.jacob-d91.workers.dev
 
