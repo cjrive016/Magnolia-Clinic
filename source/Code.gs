@@ -21,6 +21,7 @@ var CONFIG = {
   APP_NAME: 'Magnolia Clinic Hub',
   /** >>> EDIT ME: default address for alerts (can also be changed in Admin) */
   NOTIFY_EMAIL: '',
+  ORDER_EMAIL: 'Emily@magnoliaclinictn.com',   // anything that needs to be ordered is emailed here
   /** >>> EDIT ME: code needed once to create the first admin account */
   SETUP_CODE: ''  /* real code is kept in the database (kv: setup_code), not in this public repo */,
   /** token of the old Aligned Inventory app (used only for the one-time import) */
@@ -734,7 +735,7 @@ function notifyOrders_(list) {
       '\n  Date: ' + prettyNow_();
   });
   try {
-    sendMail_(settings_().notifyEmail,
+    sendMail_(CONFIG.ORDER_EMAIL,
       list.length === 1 ? 'Magnolia Inventory - 1 item needs to be ordered'
                         : 'Magnolia Inventory - ' + list.length + ' items need to be ordered',
       'Something was flagged for ordering.\n\n' + lines.join('\n\n') +
